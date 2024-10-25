@@ -1,0 +1,15 @@
+# Vehicle Allocation System
+
+## Overview
+This FastAPI application allows employees to allocate vehicles for their use, manage allocations, and view allocation history.
+
+## Requirements
+- Python 3.x
+- FastAPI
+- MongoDB (or your database of choice)
+- pytest for testing
+
+## Installation
+1. Clone the repository:
+   git clone https://github.com/username/repo-name.git
+  
