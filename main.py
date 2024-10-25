@@ -8,6 +8,8 @@ from fastapi import Depends
 
 app = FastAPI()
 
+app.include_router(allocations.router, prefix="/allocations")
+app.include_router(reports.router, prefix="/reports")
 
 
 # MongoDB URI and database name

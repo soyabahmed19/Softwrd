@@ -2,6 +2,8 @@
 from fastapi import APIRouter, HTTPException, Depends
 from motor.motor_asyncio import AsyncIOMotorClient
 from models import Allocation, AllocationUpdate
+from pydantic import BaseModel  
+from typing import List , Optional
 from crud import create_allocation, is_vehicle_allocated, update_allocation, delete_allocation, get_allocations
 from schemas import CreateAllocationSchema, AllocationSchema
 from datetime import date
@@ -13,6 +15,10 @@ db = client["vehicle_allocation_db"]
 def get_db():
     return db
 
+# Define the router
+router = APIRouter()
+
+
 class CreateAllocationSchema(BaseModel):
     employee_id: str
     vehicle_id: str
@@ -23,13 +29,6 @@ class CreateAllocationSchema(BaseModel):
 async def allocate_vehicle(allocation: CreateAllocationSchema, db=Depends(get_db)):
     # Logic for creating an allocation goes here
     return {"message": "Vehicle allocated successfully"}
-
-
-
-# Define the router
-router = APIRouter()
-
-
 
 
 # Create an allocation
