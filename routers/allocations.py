@@ -30,26 +30,9 @@ async def allocate_vehicle(allocation: CreateAllocationSchema, db=Depends(get_db
 
 
 
-@router.post("/", response_model=AllocationSchema)
-async def allocate_vehicle(allocation: CreateAllocationSchema, db: AsyncIOMotorClient = Depends(get_db)):
-    existing_allocation = await is_vehicle_allocated(db, allocation.vehicle_id, allocation.allocation_date)
-    if existing_allocation:
-        raise HTTPException(status_code=400, detail="Vehicle is already allocated for the selected date")
-    
-    allocation_data = Allocation(**allocation.dict())
-    await create_allocation(db, allocation_data)
-    return allocation_data
 
 
-@router.post("/", response_model=AllocationSchema)
-async def allocate_vehicle(allocation: CreateAllocationSchema, db: AsyncIOMotorClient = Depends(get_db)):
-    existing_allocation = await is_vehicle_allocated(db, allocation.vehicle_id, allocation.allocation_date)
-    if existing_allocation:
-        raise HTTPException(status_code=400, detail="Vehicle is already allocated for the selected date")
-    
-    allocation_data = Allocation(**allocation.dict())
-    await create_allocation(db, allocation_data)
-    return allocation_dat
+
 
 @router.get("/", response_model=List[AllocationSchema])
 async def list_allocations(employee_id: Optional[str] = None, vehicle_id: Optional[str] = None, allocation_date: Optional[date] = None, db: AsyncIOMotorClient = Depends(get_db)):
